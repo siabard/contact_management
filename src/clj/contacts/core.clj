@@ -5,7 +5,8 @@
             [reitit.ring.middleware.muuntaja :refer [format-request-middleware
                                                      format-response-middleware
                                                      format-negotiate-middleware]]
-            [muuntaja.core :as m]))
+            [muuntaja.core :as m]
+            [contracts.db :as db]))
 
 
 (defonce server (atom nil))
@@ -19,9 +20,13 @@
 (def app 
   (ring/ring-handler
    (ring/router 
-    [["/api" {:get (fn [req]
-                     {:status 200
-                      :body {:hello "ok"}})}]]
+    [["/api"
+      ["/ping" {:get (fn [req]
+                      {:status 200
+                       :body {:hello "ok"}})}]
+      ["/contracts" {:get (fn [req]
+                            {:status 200
+                             :body (db/get-contracts db/config)})}]]]
     {:data {:muuntaja m/instance
             :middleware [
                          format-negotiate-middleware
@@ -47,4 +52,8 @@
   (restart-server)
   (app {:request-method :get 
         :uri "/api"})
+  (app {:request-method :get 
+        :uri "/api/ping"})
+  (app {:request-method :get 
+        :uri "/api/contracts"})
 )
