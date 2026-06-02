@@ -1,21 +1,21 @@
-(ns contracts.db
+(ns contacts.db
   (:require [hugsql.core :as hugsql])
 )
 
 (def config
   {:classname "org.postgresql.Driver"
    :subprotocol "postgresql"
-   :subname "//localhost:5432/contracts"
+   :subname "//localhost:5432/contacts"
    :user "myuser"
    :password "myuser"})
 
-(hugsql/def-db-fns "contracts.sql")
+(hugsql/def-db-fns "contacts.sql")
 
 (comment
-  (create-contracts-table config)
-  (get-contracts config)
-  (insert-contract config {:first-name "연호" :last-name "장" :email "siabard@gmail.com"})
-  (get-contract-by-id config {:id 1})
-  (update-contract-by-id config {:first-name "연호" :last-name "장" :email "siabard@cardong.co.kr" :id 1})
+  (create-contacts-table config)
+  (get-contacts config)
+  (insert-contact config {:first-name "연호" :last-name "장" :email "siabard@gmail.com"})
+  (get-contact-by-id config {:id 1})
+  (update-contact-by-id config {:first-name "연호" :last-name "장" :email "siabard@cardong.co.kr" :id 1})
 )
 

@@ -6,7 +6,8 @@
                                                      format-response-middleware
                                                      format-negotiate-middleware]]
             [muuntaja.core :as m]
-            [contracts.db :as db]))
+            [contacts.db :as db]
+            [contacts.routes :refer [ping-routes contacts-routes]]))
 
 
 (defonce server (atom nil))
@@ -21,12 +22,7 @@
   (ring/ring-handler
    (ring/router 
     [["/api"
-      ["/ping" {:get (fn [req]
-                      {:status 200
-                       :body {:hello "ok"}})}]
-      ["/contracts" {:get (fn [req]
-                            {:status 200
-                             :body (db/get-contracts db/config)})}]]]
+      ]]
     {:data {:muuntaja m/instance
             :middleware [
                          format-negotiate-middleware
@@ -55,5 +51,5 @@
   (app {:request-method :get 
         :uri "/api/ping"})
   (app {:request-method :get 
-        :uri "/api/contracts"})
+        :uri "/api/contacts"})
 )
