@@ -1,0 +1,23 @@
+* INSERT
+#+begin_src bash
+
+  curl -X POST \
+       -H "Content-Type: application/json" \
+       --data '{"first-name": "김", "last-name": "진아", "email": "test@test.com"}'
+#+end_src
+
+
+* UPDATE
+#+begin_src bash
+
+  curl -X PUT http://localhost:4000/api/contacts/2 \
+       -H "Content-Type: application/json" \
+       --data '{"first-name": "김", "last-name": "진아", "email": "lover@test.com"}'
+#+end_src
+
+* DELETE
+#+begin_src bash
+
+  curl -X DELETE http://localhost:4000/api/contacts/2 \
+        -H "Content-Type: application/json"
+#+end_src

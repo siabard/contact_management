@@ -2,11 +2,16 @@
   (:require [org.httpkit.server :refer [run-server]]
             [reitit.ring :as ring]
             [reitit.ring.middleware.exception :refer [exception-middleware]]
+            [reitit.ring.middleware.parameters :refer [parameters-middleware]]
             [reitit.ring.middleware.muuntaja :refer [format-request-middleware
                                                      format-response-middleware
                                                      format-negotiate-middleware]]
+            [reitit.ring.coercion :refer [coerce-exceptions-middleware
+                                          coerce-request-middleware
+                                          coerce-response-middleware]]
+            [reitit.coercion.schema]
+            [schema.core :as s]
             [muuntaja.core :as m]
-            [contacts.db :as db]
             [contacts.routes :refer [ping-routes contacts-routes]]))
 
 
@@ -22,13 +27,19 @@
   (ring/ring-handler
    (ring/router 
     [["/api"
+      ping-routes
+      contacts-routes
       ]]
-    {:data {:muuntaja m/instance
-            :middleware [
+    {:data {:coercion reitit.coercion.schema/coercion                   
+            :muuntaja m/instance
+            :middleware [parameters-middleware
                          format-negotiate-middleware
                          format-response-middleware
                          exception-middleware
-                         format-request-middleware]}})
+                         format-request-middleware
+                         coerce-exceptions-middleware
+                         coerce-response-middleware
+                         coerce-request-middleware]}})
    (ring/routes 
     (ring/redirect-trailing-slash-handler)
     (ring/create-default-handler 
