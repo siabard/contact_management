@@ -16,7 +16,7 @@
   "main": "index.js",
   "scripts": {
     "start": "shadow-cljs watch contacts",
-    "build-styles": "tailwind build src/cljs/tailwind.css -o resources/public/css/main.css"
+    "build-styles": "tailwind -i src/cljs/tailwind.css -o resources/public/css/main.css --watch"
   },
   "dependencies": {
     "react": "^19.2.7",

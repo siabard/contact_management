@@ -5,7 +5,7 @@
             ["react-dom/client" :as rdom]))
 
 (defnc nav []
-  (d/nav {:class "py-4 shadow"}
+  (d/nav {:class "py-1 shadow"}
          (d/div {:class "container"}
                 (d/h2 {:class "text-xl"} "Contact Book"))))
 
