@@ -1,0 +1,27 @@
+{
+  "name": "contact_management",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/siabard/contact_management#readme",
+  "bugs": {
+    "url": "https://github.com/siabard/contact_management/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/siabard/contact_management.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+      "start": "shadow-cljs watch contacts"
+  },
+  "dependencies": {
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "react-refresh": "^0.18.0",
+    "shadow-cljs": "^3.4.11",
+    "tailwindcss": "^4.3.0"
+  }
+}
