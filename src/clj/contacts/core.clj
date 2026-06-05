@@ -34,7 +34,7 @@
     {:data {:coercion reitit.coercion.schema/coercion                   
             :muuntaja m/instance
             :middleware [[wrap-cors 
-                          :access-control-allow-origin [#"http://localhost:4000"]
+                          :access-control-allow-origin [#"http://localhost:4200"]
                           :access-control-allow-methods [:get :post :put :delete]]
                          parameters-middleware
                          format-negotiate-middleware
