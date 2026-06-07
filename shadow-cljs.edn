@@ -10,5 +10,6 @@
                      :modules {:main {:init-fn contacts.core/init}}
                      :devtools {:watch-dir "resources/public"
                                 :http-root "resources/public"
+                                :react-fresh true
                                 :http-port 4200}}}
 }

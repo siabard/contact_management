@@ -4,8 +4,10 @@
             [helix.dom :as d]
             ["react-dom/client" :as rdom]))
 
+(defonce root (rdom/createRoot (.getElementById js/document "app")))
+
 (defnc nav []
-  (d/nav {:class "py-1 shadow"}
+  (d/nav {:class "py-2 shadow"}
          (d/div {:class "container"}
                 (d/h2 {:class "text-xl"} "Contact Book"))))
 
@@ -14,8 +16,16 @@
     ($ nav)))
 
 
-(defn ^:export init []
-  (.render (rdom/createRoot (js/document.getElementById "app")) ($ app)))
+(defn render []
+  (.render root ($ app)))
+
+(defn ^:export init 
+  []
+  (render))
+
+(defn ^:dev/after-load reload 
+  []
+  (render))
 
 (comment
   (GET "http://localhost:4000/api/contacts/" 
