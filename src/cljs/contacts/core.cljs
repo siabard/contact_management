@@ -1,19 +1,31 @@
 (ns contacts.core
   (:require [ajax.core :refer [GET]]
             [helix.core :refer [defnc $ <>]]
+            [helix.hooks :as hooks]
             [helix.dom :as d]
-            ["react-dom/client" :as rdom]))
+            ["react-dom/client" :as rdom]
+            [contacts.components.nav :refer [nav]]
+            [contacts.components.contact-list :refer [contact-list]]
+            ))
 
 (defonce root (rdom/createRoot (.getElementById js/document "app")))
 
-(defnc nav []
-  (d/nav {:class "py-2 shadow"}
-         (d/div {:class "container"}
-                (d/h2 {:class "text-xl"} "Contact Book"))))
-
 (defnc app []
-  (<>
-    ($ nav)))
+  (let [[state set-state] (hooks/use-state nil)]
+    (hooks/use-effect
+     :once
+     (GET "http://localhost:4000/api/contacts/" 
+          {
+           :handler (fn [response] 
+                      (set-state response))
+           :response-format :json
+           :keywords? true
+           })
+     )
+    (<>
+     ($ nav)
+     (d/div {:class "container pt-4"}
+            ($ contact-list {:contacts state})))))
 
 
 (defn render []

@@ -2,7 +2,7 @@
  :source-paths ["src/cljs"]
  :nrepl {:port 9000}
  :dependencies [[cider/cider-nrepl "0.59.0"]
-                [cljs-ajax "0.9.0-beta1"]
+                [cljs-ajax "0.8.4"]
                 [lilactown/helix "0.2.2"]]
  :builds {:contacts {:target :browser
                      :output-dir "resources/public/js"
