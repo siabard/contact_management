@@ -6,6 +6,7 @@
             ["react-dom/client" :as rdom]
             [contacts.components.nav :refer [nav]]
             [contacts.components.contact-list :refer [contact-list]]
+            [contacts.components.contact-form :refer [contact-form]]
             ))
 
 (defonce root (rdom/createRoot (.getElementById js/document "app")))
@@ -20,12 +21,13 @@
                       (set-state response))
            :response-format :json
            :keywords? true
-           })
-     )
-    (<>
-     ($ nav)
-     (d/div {:class "container pt-4"}
-            ($ contact-list {:contacts state})))))
+           }))
+    (if state
+      (<>
+       ($ nav)
+       (d/div {:class "container pt-4"}
+              ($ contact-list {:contacts state})
+              ($ contact-form {:contact (first state)}))))))
 
 
 (defn render []
